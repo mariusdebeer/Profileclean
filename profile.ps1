@@ -52,13 +52,7 @@ $Items = @('Archived History',
             Where-Object { -not ($_.psiscontainer) } | 
             Foreach-Object {Remove-Item $_.FullName}
 
-        # delete only .bak files which are older than 90 days
-        Get-ChildItem -include *.bak $user_path -Recurse | 
-        Where-Object {$_.LastWriteTime -lt $del_date} |
-            Where-Object { -not ($_.psiscontainer) } | 
-            Foreach-Object {Remove-Item $_.FullName}
-
-            #Clean Chrome
+        #Clean Chrome
         $Items | % {
             if (Test-Path "$ChromeFolder\$_") {
             Remove-Item "$ChromeFolder\$_" -Recurse
